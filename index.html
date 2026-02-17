@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anya</title>
+
+<style>
+body{
+margin:0;
+height:100vh;
+background:#f7b7c8;
+display:flex;
+justify-content:center;
+align-items:center;
+font-family:sans-serif;
+overflow:hidden;
+}
+
+.container{
+text-align:center;
+color:white;
+padding:10px;
+transition:filter .5s ease;
+}
+
+.blur{
+filter: blur(4px);
+}
+
+.glow{
+font-size:42px;
+animation:glow 2s infinite alternate;
+}
+
+@keyframes glow{
+from{text-shadow:0 0 5px white;}
+to{text-shadow:0 0 25px #ff4d88;}
+}
+
+button{
+padding:12px 22px;
+font-size:16px;
+border:none;
+border-radius:20px;
+cursor:pointer;
+margin:10px;
+}
+
+#always{
+background:#ff4d88;
+color:white;
+}
+
+#nope{
+position:absolute;
+background:#444;
+color:white;
+left:50%;
+top:70%;
+}
+
+iframe{
+margin-top:10px;
+border-radius:10px;
+width:260px;
+height:150px;
+}
+
+/* Hearts */
+.heart{
+position:absolute;
+font-size:22px;
+animation:fall 3s linear forwards;
+}
+
+@keyframes fall{
+from{top:-20px;}
+to{top:100vh;}
+}
+
+/* Sparkles */
+.sparkle{
+position:absolute;
+font-size:14px;
+animation:spark 2s linear forwards;
+}
+
+@keyframes spark{
+from{opacity:1;}
+to{opacity:0; transform:translateY(-40px);}
+}
+
+/* Poem */
+#poem{
+display:none;
+margin:20px auto 0;
+background:rgba(255,255,255,0.9);
+padding:18px;
+border-radius:12px;
+font-size:13px;
+color:#333;
+line-height:1.6;
+max-width:90%;
+animation:fadeIn 1.5s ease;
+}
+
+@keyframes fadeIn{
+from{opacity:0;}
+to{opacity:1;}
+}
+
+/* Mobile tweak */
+@media(max-width:600px){
+.glow{font-size:36px;}
+}
+</style>
+</head>
+
+<body>
+
+<div id="main" class="container">
+
+<div class="glow">Anya 🌸</div>
+
+<p>Will you be my <b>THE ONE</b>?</p>
+
+<!-- Music -->
+<iframe
+src="https://www.youtube.com/embed/sL8-vrfTR7k"
+frameborder="0"
+allow="autoplay">
+</iframe>
+
+<p style="font-size:12px;">Tap ▶ to start music 🙂</p>
+
+<div id="buttons">
+<button id="always">Always 💗</button>
+</div>
+
+<div id="poem">
+<div style="font-size:26px;margin-bottom:6px;">🎀</div>
+
+It's a wasteful day when I don't talk with you<br>
+My sky turned colour of love instead of blue<br><br>
+
+You are my moon and I am your light<br>
+Together we both are moonlight<br>
+In the night sky shining so bright<br>
+All over this mankind<br>
+Will you be in my locket when I go to fight<br>
+During war times<br><br>
+
+They broke your heart, I see the cracks,<br>
+But diamonds born where pressure at.<br>
+You scared to love, I get that pain,<br>
+There is a rainbow(me😎) after every stormy rain.<br><br>
+
+I don't want gold<br>
+I want my heart to be haunted by your soul<br>
+I don't want silver<br>
+I want the parts of you nobody stayed for...
+</div>
+
+</div>
+
+<button id="nope">Nope 😌</button>
+
+<script>
+const nope=document.getElementById("nope");
+const always=document.getElementById("always");
+const poem=document.getElementById("poem");
+const main=document.getElementById("main");
+const buttons=document.getElementById("buttons");
+
+// Nope escapes
+function moveNope(){
+nope.style.left=Math.random()*window.innerWidth+"px";
+nope.style.top=Math.random()*window.innerHeight+"px";
+}
+nope.onmouseover=moveNope;
+nope.onclick=moveNope;
+
+// Always clicked
+always.onclick=function(){
+poem.style.display="block";
+buttons.style.display="none";
+nope.style.display="none";
+main.classList.add("blur");
+
+for(let i=0;i<25;i++)createHeart();
+for(let i=0;i<20;i++)createSparkle();
+};
+
+// Hearts
+function createHeart(){
+let h=document.createElement("div");
+h.className="heart";
+h.innerHTML="❤️";
+h.style.left=Math.random()*window.innerWidth+"px";
+document.body.appendChild(h);
+setTimeout(()=>h.remove(),3000);
+}
+
+// Sparkles
+function createSparkle(){
+let s=document.createElement("div");
+s.className="sparkle";
+s.innerHTML="✨";
+s.style.left=Math.random()*window.innerWidth+"px";
+s.style.top=Math.random()*window.innerHeight+"px";
+document.body.appendChild(s);
+setTimeout(()=>s.remove(),2000);
+}
+</script>
+
+</body>
+</html>
