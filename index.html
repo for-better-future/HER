@@ -16,6 +16,7 @@ font-family:sans-serif;
 overflow:hidden;
 }
 
+/* MAIN CONTENT */
 .container{
 text-align:center;
 color:white;
@@ -66,7 +67,7 @@ width:260px;
 height:150px;
 }
 
-/* Hearts */
+/* HEARTS */
 .heart{
 position:absolute;
 font-size:22px;
@@ -78,7 +79,7 @@ from{top:-20px;}
 to{top:100vh;}
 }
 
-/* Sparkles */
+/* SPARKLES */
 .sparkle{
 position:absolute;
 font-size:14px;
@@ -90,29 +91,31 @@ from{opacity:1;}
 to{opacity:0; transform:translateY(-40px);}
 }
 
-/* Poem */
+/* POEM POPUP */
 #poem{
 display:none;
-margin:20px auto 0;
-background:rgba(255,255,255,0.9);
-padding:18px;
-border-radius:12px;
-font-size:13px;
+position:fixed;
+top:50%;
+left:50%;
+transform:translate(-50%,-50%);
+background:white;
 color:#333;
-line-height:1.6;
-max-width:90%;
+padding:25px;
+border-radius:15px;
+width:90%;
+max-width:400px;
+max-height:70vh;
+overflow-y:auto;
+z-index:10;
 animation:fadeIn 1.5s ease;
+box-shadow:0 10px 30px rgba(0,0,0,0.2);
 }
 
 @keyframes fadeIn{
-from{opacity:0;}
-to{opacity:1;}
+from{opacity:0; transform:translate(-50%,-55%);}
+to{opacity:1; transform:translate(-50%,-50%);}
 }
 
-/* Mobile tweak */
-@media(max-width:600px){
-.glow{font-size:36px;}
-}
 </style>
 </head>
 
@@ -124,7 +127,6 @@ to{opacity:1;}
 
 <p>Will you be my <b>THE ONE</b>?</p>
 
-<!-- Music -->
 <iframe
 src="https://www.youtube.com/embed/sL8-vrfTR7k"
 frameborder="0"
@@ -137,8 +139,13 @@ allow="autoplay">
 <button id="always">Always 💗</button>
 </div>
 
+</div>
+
+<button id="nope">Nope 😌</button>
+
+<!-- POEM POPUP -->
 <div id="poem">
-<div style="font-size:26px;margin-bottom:6px;">🎀</div>
+<div style="font-size:26px;margin-bottom:10px;text-align:center;">🎀</div>
 
 It's a wasteful day when I don't talk with you<br>
 My sky turned colour of love instead of blue<br><br>
@@ -161,16 +168,11 @@ I don't want silver<br>
 I want the parts of you nobody stayed for...
 </div>
 
-</div>
-
-<button id="nope">Nope 😌</button>
-
 <script>
 const nope=document.getElementById("nope");
 const always=document.getElementById("always");
 const poem=document.getElementById("poem");
 const main=document.getElementById("main");
-const buttons=document.getElementById("buttons");
 
 // Nope escapes
 function moveNope(){
@@ -183,9 +185,8 @@ nope.onclick=moveNope;
 // Always clicked
 always.onclick=function(){
 poem.style.display="block";
-buttons.style.display="none";
-nope.style.display="none";
 main.classList.add("blur");
+nope.style.display="none";
 
 for(let i=0;i<25;i++)createHeart();
 for(let i=0;i<20;i++)createSparkle();
